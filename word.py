@@ -16,6 +16,8 @@ while attempts > 0 :
         print('Please enter a single letter')
     if guess in guessed_letters:
         print('You\'ve already guessed this letter!')
+        continue
+    guessed_letters.add(guess)
     if guess in word:
         for i in range(len(word)):
             if word[i]==guess:
