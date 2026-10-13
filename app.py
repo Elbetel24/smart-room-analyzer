@@ -12,7 +12,7 @@ st.set_page_config(
 
 st.title("AI room analyzer")
 st.write(
-    "Upload a room photo to detect objects and"
+    "Upload a room photo to detect objects and "
     "generate an inventory using computer vision"
 )
 
@@ -43,7 +43,7 @@ if uploaded_file is not None:
     image=Image.open(uploaded_file).convert("RGB")
 
     st.subheader("Original Room image")
-    st.image(image, width="stretch")
+    st.image(image)
 
     with st.spinner("Analyzing your room..."):
         results=model.predict(
@@ -66,7 +66,7 @@ if uploaded_file is not None:
                  )
 
     with right:
-        st.subheader("Room nventory")
+        st.subheader("Room inventory")
 
         if result.boxes is not None and len(result.boxes)> 0:
             detected_classes=[
