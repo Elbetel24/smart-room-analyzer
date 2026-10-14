@@ -59,7 +59,7 @@ def index():
                 counts=dict(Counter(detected_classes))
                 counts=dict(sorted(counts.items()))
                 total=sum(counts.values())
-        except (valueError, OSError) as exc:
+        except (ValueError, OSError) as exc:
             error=str(exc) or "could not read this image."
 
 
@@ -67,7 +67,7 @@ def index():
 
 
     return render_template(
-        "index.html"
+        "index.html",
         annotated_image=annotated_image,
         counts=counts,
         total=total,

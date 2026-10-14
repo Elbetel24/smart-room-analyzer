@@ -87,6 +87,43 @@
                 </pre>
             </div>
         </section>
+
+        <p class="endnote">
+            Detection counts are estimes. Objects may bbe missed,
+            and the model recognizes only categories it was trained to 
+            detect.
+        </p>
+        {% endif}
     </main>
+    <script>
+        const slider=document.getElementById("confidence")
+        const display=document.getElementById("confidence-value")
+
+        slider.addEventListener("input", function () {
+            display.textContent=
+                Math.round(Number(slider.value)*100) + "%";
+        });
+
+        if (downloadButton) {
+            downloadButton.addEventListener("click", function () {
+                const report =
+                    document.getElementById("report-text").textContent;
+
+                const blob = new Blob([report], {
+                    type: "text/plain;charset=utf-8"
+                });
+
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+
+                link.href = url;
+                link.download = "room_inventory.txt";
+                link.click();
+
+                URL.revokeObjectURL(url);
+            });
+        }
+    </script>
+
 </body>
 </html>
