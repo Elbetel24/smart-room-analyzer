@@ -52,10 +52,39 @@
                     src="data:image/jpeg;base64,{{annotated_image}}"
                     alt="Room image with AI detection boxes"
                     >
+            </div>
+            <div class="inventory-card">
+                <h2> Room inventory </h2>
+                
+                <div class="metric">
+                    <span> Objects detected</span>
+                    <strong> {{ total }}</strong>
+                </div>
+                {% if counts %}
+                    <h3>Detected Objects</h3>
+                    <ul>
+                        {% for object_name,count in counts.items() %}
+                        <li>
+                            <span>{{ object_name|title }}</span>
+                            <strong>{{ count }}</strong>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p> No objects detected. Try another image
+                        or lower the confidence threshold.
+                    </p>
+                {% endif %}
 
-                <div class
-                
-                
+                <button type="button" id="confidence-report">
+                    Download the room inventory
+                </button>
+                <pre id="report-text"  hidden>Room inventory
+
+                    Total detections: {{ total }}
+                    {% for object_name,count in counts.items() %}{{ object_name|title}}: {{ count }}
+                    {% endfor %}
+                </pre>
             </div>
         </section>
     </main>
