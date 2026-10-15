@@ -1,3 +1,7 @@
-#Smart room analyzer
+# Smart Room Analyzer
 
--Object detection-the image will show boundig boxes and class labels and confidence scores
+## Features
+
+- Detects objects in an image.
+- Displays bounding boxes around detected objects.
+- Shows each detected object's class label and confidence score.
