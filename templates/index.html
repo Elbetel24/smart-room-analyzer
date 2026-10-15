@@ -44,7 +44,7 @@
             {% endif %}
         </section>
 
-        {% if annotate_image is not none %}
+        {% if annotated_image is defined and annotated_image is not none %}
         <section class="results">
             <div class="image-card">
                 <h2> AI detection results</h2>
@@ -89,20 +89,22 @@
         </section>
 
         <p class="endnote">
-            Detection counts are estimes. Objects may bbe missed,
+            Detection counts are estimates. Objects may be missed,
             and the model recognizes only categories it was trained to 
             detect.
         </p>
-        {% endif}
+        {% endif %}
     </main>
     <script>
-        const slider=document.getElementById("confidence")
-        const display=document.getElementById("confidence-value")
+        const slider = document.getElementById("confidence");
+        const display = document.getElementById("confidence-value");
+        const downloadButton = document.getElementById("confidence-report");
 
-        slider.addEventListener("input", function () {
-            display.textContent=
-                Math.round(Number(slider.value)*100) + "%";
-        });
+        if (slider && display) {
+            slider.addEventListener("input", function () {
+                display.textContent = Math.round(Number(slider.value) * 100) + "%";
+            });
+        }
 
         if (downloadButton) {
             downloadButton.addEventListener("click", function () {
@@ -118,8 +120,9 @@
 
                 link.href = url;
                 link.download = "room_inventory.txt";
+                document.body.appendChild(link);
                 link.click();
-
+                link.remove();
                 URL.revokeObjectURL(url);
             });
         }
