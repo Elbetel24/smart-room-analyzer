@@ -46,7 +46,7 @@ def index():
             Image.fromarray(plotted_image).save(
                 buffer, format="JPEG"
             )
-            annotated_image=base64.b64.encode(
+            annotated_image=base64.b64encode(
                 buffer.getvalue()
             ).decode("utf-8")
 

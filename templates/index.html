@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename ='css/style.css')}}">
     <title>Smart room analyzer</title>
 </head>
 <body>
@@ -21,6 +22,7 @@
                     id="room_image"
                     name="room_image"
                     accept=".jpg,.jpeg,.png"
+                    required
                 >
                 <label for="confidence">
                     Detection confidence: 
@@ -76,15 +78,14 @@
                     </p>
                 {% endif %}
 
-                <button type="button" id="confidence-report">
+                <button type="button" id="download-report">
                     Download the room inventory
                 </button>
-                <pre id="report-text"  hidden>Room inventory
+                <pre id="report-text" hidden>Room inventory
 
-                    Total detections: {{ total }}
-                    {% for object_name,count in counts.items() %}{{ object_name|title}}: {{ count }}
-                    {% endfor %}
-                </pre>
+Total detections: {{ total }}
+{% for object_name, count in counts.items() %}{{ object_name|title }}: {{ count }}
+{% endfor %}</pre>
             </div>
         </section>
 
@@ -98,7 +99,7 @@
     <script>
         const slider = document.getElementById("confidence");
         const display = document.getElementById("confidence-value");
-        const downloadButton = document.getElementById("confidence-report");
+        const downloadButton = document.getElementById("download-report");
 
         if (slider && display) {
             slider.addEventListener("input", function () {
